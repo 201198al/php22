@@ -62,3 +62,35 @@ function getShortName($fullname) {
     $parts = getPartsFromFullname($fullname);
     return $parts['name'] . ' ' . mb_substr($parts['surname'], 0, 1) . '.';
 }
+function getGenderFromName($fullname) {
+    $parts = getPartsFromFullname($fullname);
+    $score = 0;
+
+    if (mb_substr($parts['patronomyc'], -3) === 'вна') $score--;
+    if (mb_substr($parts['name'], -1) === 'а') $score--;
+    if (mb_substr($parts['surname'], -2) === 'ва') $score--;
+
+    if (mb_substr($parts['patronomyc'], -2) === 'ич') $score++;
+    if (in_array(mb_substr($parts['name'], -1), ['й', 'н'])) $score++;
+    if (mb_substr($parts['surname'], -1) === 'в') $score++;
+
+    if ($score > 0) return 1;
+    if ($score < 0) return -1;
+    return 0;
+}
+function getGenderFromName($fullname) {
+    $parts = getPartsFromFullname($fullname);
+    $score = 0;
+
+    if (mb_substr($parts['patronomyc'], -3) === 'вна') $score--;
+    if (mb_substr($parts['name'], -1) === 'а') $score--;
+    if (mb_substr($parts['surname'], -2) === 'ва') $score--;
+
+    if (mb_substr($parts['patronomyc'], -2) === 'ич') $score++;
+    if (in_array(mb_substr($parts['name'], -1), ['й', 'н'])) $score++;
+    if (mb_substr($parts['surname'], -1) === 'в') $score++;
+
+    if ($score > 0) return 1;
+    if ($score < 0) return -1;
+    return 0;
+}
