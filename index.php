@@ -94,3 +94,23 @@ function getGenderFromName($fullname) {
     if ($score < 0) return -1;
     return 0;
 }
+function getGenderDescription($array) {
+    $total = count($array);
+    $male = $female = $undefined = 0;
+
+    foreach ($array as $person) {
+        $gender = getGenderFromName($person['fullname']);
+        if ($gender === 1) $male++;
+        elseif ($gender === -1) $female++;
+        else $undefined++;
+    }
+
+    $malePercent = round(($male / $total) * 100, 1);
+    $femalePercent = round(($female / $total) * 100, 1);
+    $undefinedPercent = round(($undefined / $total) * 100, 1);
+
+    return "Гендерный состав аудитории:\n---------------------------\n"
+        . "Мужчины - $malePercent%\n"
+        . "Женщины - $femalePercent%\n"
+        . "Не удалось определить - $undefinedPercent%";
+}
