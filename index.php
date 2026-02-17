@@ -114,3 +114,41 @@ function getGenderDescription($array) {
         . "Женщины - $femalePercent%\n"
         . "Не удалось определить - $undefinedPercent%";
 }
+function getPerfectPartner($surname, $name, $patronomyc, $array) {
+    $surname = mb_convert_case($surname, MB_CASE_TITLE);
+    $name = mb_convert_case($name, MB_CASE_TITLE);
+    $patronomyc = mb_convert_case($patronomyc, MB_CASE_TITLE);
+
+    $fullname = getFullnameFromParts($surname, $name, $patronomyc);
+    $gender = getGenderFromName($fullname);
+
+    do {
+        $partner = $array[array_rand($array)];
+        $partnerGender = getGenderFromName($partner['fullname']);
+    } while ($partnerGender === $gender || $partnerGender === 0);
+
+    $shortName1 = getShortName($fullname);
+    $shortName2 = getShortName($partner['fullname']);
+    $percent = number_format(mt_rand(5000, 10000) / 100, 2, '.', '');
+
+    return "$shortName1 + $shortName2 = \n♡ Идеально на $percent% ♡";
+}
+function getPerfectPartner($surname, $name, $patronomyc, $array) {
+    $surname = mb_convert_case($surname, MB_CASE_TITLE);
+    $name = mb_convert_case($name, MB_CASE_TITLE);
+    $patronomyc = mb_convert_case($patronomyc, MB_CASE_TITLE);
+
+    $fullname = getFullnameFromParts($surname, $name, $patronomyc);
+    $gender = getGenderFromName($fullname);
+
+    do {
+        $partner = $array[array_rand($array)];
+        $partnerGender = getGenderFromName($partner['fullname']);
+    } while ($partnerGender === $gender || $partnerGender === 0);
+
+    $shortName1 = getShortName($fullname);
+    $shortName2 = getShortName($partner['fullname']);
+    $percent = number_format(mt_rand(5000, 10000) / 100, 2, '.', '');
+
+    return "$shortName1 + $shortName2 = \n♡ Идеально на $percent% ♡";
+}
