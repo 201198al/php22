@@ -46,3 +46,15 @@ $example_persons_array = [
         'job' => 'babysitter',
     ],
 ];
+function getPartsFromFullname($fullname) {
+    $parts = explode(' ', $fullname);
+    return [
+        'surname' => $parts[0] ?? '',
+        'name' => $parts[1] ?? '',
+        'patronomyc' => $parts[2] ?? '',
+    ];
+}
+
+function getFullnameFromParts($surname, $name, $patronomyc) {
+    return $surname . ' ' . $name . ' ' . $patronomyc;
+}
